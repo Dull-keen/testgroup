@@ -66,6 +66,28 @@ void update_field(int field[HEIGHT][WIDTH]) {
     }
 }
 
+/*
+ * ДЛЯ САМОПРОВЕРКИ:
+ */
+#ifdef TEST_PART2
+int main(void) {
+    int field[HEIGHT][WIDTH] = {0};
+    // Создаём осциллятор «мигалка» (Blinker): 3 клетки в ряд
+    field[10][10] = 1;
+    field[10][11] = 1;
+    field[10][12] = 1;
+
+    printf("Поколение 0: горизонтальная линия\n");
+    update_field(field);
+    printf("Поколение 1: должна стать вертикальной линией:\n");
+    printf("field[9][11]=%d (ожидается 1)\n", field[9][11]);
+    printf("field[10][11]=%d (ожидается 1)\n", field[10][11]);
+    printf("field[11][11]=%d (ожидается 1)\n", field[11][11]);
+    printf("field[10][10]=%d (ожидается 0)\n", field[10][10]);
+    return 0;
+}
+#endif
+
 int count_neighbors(int field[HEIGHT][WIDTH], int y, int x) {
     (void)field;
     (void)y;
