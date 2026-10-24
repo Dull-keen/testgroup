@@ -27,6 +27,21 @@ void read_field(int field[HEIGHT][WIDTH]) {
     }
 }
 
+#ifdef TEST_PART1
+int main(void) {
+    int field[HEIGHT][WIDTH];
+    read_field(field);
+    printf("Проверка считывания поля (первые 5 строк):\n");
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            printf("%c", field[i][j] ? '*' : '.');
+        }
+        printf("\n");
+    }
+    return 0;
+}
+#endif
+
 void read_field(int field[HEIGHT][WIDTH]) { (void)field; }
 
 /* ========================================================================= */
