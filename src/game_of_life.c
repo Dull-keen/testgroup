@@ -20,9 +20,23 @@ void render(int field[HEIGHT][WIDTH]);
 
 void read_field(int field[HEIGHT][WIDTH]) { (void)field; }
 
-/* ========================================================================= */
-/*            ЧАСТЬ 2: ЛОГИКА И МАТЕМАТИКА (ВЕТКА feature/logic) */
-/* ========================================================================= */
+// Подсчёт живых соседей вокруг клетки (y, x) с учётом замкнутости тора
+int count_neighbors(int field[HEIGHT][WIDTH], int y, int x) {
+    int count = 0;
+    for (int dy = -1; dy <= 1; dy++) {
+        for (int dx = -1; dx <= 1; dx++) {
+            // Саму центральную клетку не считаем
+            if (dy == 0 && dx == 0) {
+                // continue;  ПОМЕНЯТЬ
+            }
+            // Формула тора: правый край соединён с левым, верх с низом
+            int ny = (y + dy + HEIGHT) % HEIGHT;
+            int nx = (x + dx + WIDTH) % WIDTH;
+            count += field[ny][nx];
+        }
+    }
+    return count;
+}
 
 int count_neighbors(int field[HEIGHT][WIDTH], int y, int x) {
     (void)field;
