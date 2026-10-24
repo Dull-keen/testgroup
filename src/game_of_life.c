@@ -4,19 +4,43 @@
 #define WIDTH 80
 #define HEIGHT 25
 
-/* Часть 1: Ввод данных */
 void read_field(int field[HEIGHT][WIDTH]);
-
-/* Часть 2: Логика игры */
 int count_neighbors(int field[HEIGHT][WIDTH], int y, int x);
 void update_field(int field[HEIGHT][WIDTH]);
-
-/* Часть 3: Отображение и главный цикл  */
 void render(int field[HEIGHT][WIDTH]);
 
-/* ========================================================================= */
-/*               ЧАСТЬ 1: ВВОД ДАННЫХ (ВЕТКА feature/input)     */
-/* ========================================================================= */
+void read_field(int field[HEIGHT][WIDTH]) {
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            char c = getchar();
+
+            if (c == '\n') {
+                c = getchar();
+            }
+
+            if (c == '*' || c == '1') {
+                field[i][j] = 1;
+            } else {
+                field[i][j] = 0;
+            }
+        }
+    }
+}
+
+#ifdef TEST_PART1
+int main(void) {
+    int field[HEIGHT][WIDTH];
+    read_field(field);
+    printf("Проверка считывания поля (первые 5 строк):\n");
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            printf("%c", field[i][j] ? '*' : '.');
+        }
+        printf("\n");
+    }
+    return 0;
+}
+#endif
 
 void read_field(int field[HEIGHT][WIDTH]) { (void)field; }
 
