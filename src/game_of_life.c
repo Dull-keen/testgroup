@@ -38,6 +38,34 @@ int count_neighbors(int field[HEIGHT][WIDTH], int y, int x) {
     return count;
 }
 
+// Расчёт нового поколения на основе текущего
+void update_field(int field[HEIGHT][WIDTH]) {
+    int next[HEIGHT][WIDTH];
+
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            int n = count_neighbors(field, i, j);
+            // Правило 1: живая выживает при 2 или 3 соседях
+            if (field[i][j] == 1 && (n == 2 || n == 3)) {
+                next[i][j] = 1;
+                // Правило 2: мёртвая зарождается ровно при 3 соседях
+            } else if (field[i][j] == 0 && n == 3) {
+                next[i][j] = 1;
+                // Правило 3: во всех остальных случаях умирает
+            } else {
+                next[i][j] = 0;
+            }
+        }
+    }
+
+    // Копируем рассчитанное поколение обратно в исходное поле
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            field[i][j] = next[i][j];
+        }
+    }
+}
+
 int count_neighbors(int field[HEIGHT][WIDTH], int y, int x) {
     (void)field;
     (void)y;
